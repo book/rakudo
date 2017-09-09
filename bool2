@@ -6,7 +6,6 @@ use Perl6::Metamodel;
 
 my stub Bool2 metaclass Perl6::Metamodel::EnumHOW { ... };
 
-BEGIN {
 
     # class Bool2 is Int {
     #     has str $!key;
@@ -44,12 +43,11 @@ BEGIN {
 
     EXPORT::DEFAULT.WHO<Bool2>       := Bool2;
 
-}
 
 # src/core/Bool2.pm
 
 # enum Bool2 declared in BOOTSTRAP
-BEGIN {
+
     Bool2.^add_method('Bool2',    my proto method Bool2(|)    { * });
     Bool2.^add_method('gist',    my proto method gist(|)    { * });
     Bool2.^add_method('Numeric', my proto method Numeric(|) { * });
@@ -58,8 +56,7 @@ BEGIN {
     Bool2.^add_method('pick',    my proto method pick(|) { * });
     Bool2.^add_method('roll',    my proto method roll(|) { * });
     Bool2.^add_method('perl',    my proto method perl(|) { * });
-}
-BEGIN {
+
     Bool2.^add_multi_method('Bool2',    my multi method Bool2(Bool2:D:)    { self });
     Bool2.^add_multi_method('gist',    my multi method gist(Bool2:D:)    { self ?? 'True' !! 'False' });
     Bool2.^add_multi_method('Str',     my multi method Str(Bool2:D:)     { self ?? 'True' !! 'False' });
@@ -71,8 +68,7 @@ BEGIN {
 
     Bool2.^add_multi_method('pick', my multi method pick(Bool2:U:)    { nqp::p6bool(nqp::isge_n(nqp::rand_n(2e0), 1e0)) });
     Bool2.^add_multi_method('roll', my multi method roll(Bool2:U:)    { nqp::p6bool(nqp::isge_n(nqp::rand_n(2e0), 1e0)) });
-}
-BEGIN {
+
     Bool2.^add_multi_method('Bool2',    my multi method Bool2(Bool2:U:)    { Bool2::False });
     Bool2.^add_multi_method('ACCEPTS', my multi method ACCEPTS(Bool2:U: \topic ) { nqp::istype(topic, Bool2) });
     Bool2.^add_multi_method('gist',    my multi method gist(Bool2:U:)    { '(Bool2)' });
@@ -87,5 +83,4 @@ BEGIN {
     Bool2.^add_method('enums', my method enums() { self.^enum_values.Map });
 
     Bool2.^compose;
-}
 
