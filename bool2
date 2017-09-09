@@ -1,3 +1,5 @@
+#!./perl6
+
 # src/Perl6/Metamodel/BOOTSTRAP.nqp
 
 use Perl6::Metamodel;
