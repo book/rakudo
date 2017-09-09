@@ -2,88 +2,88 @@
 
 use Perl6::Metamodel;
 
-my stub Bool metaclass Perl6::Metamodel::EnumHOW { ... };
+my stub Bool2 metaclass Perl6::Metamodel::EnumHOW { ... };
 
 BEGIN {
 
-    # class Bool is Int {
+    # class Bool2 is Int {
     #     has str $!key;
     #     has int $!value;
-    Bool.HOW.set_base_type(Bool, Int);
-    Bool.HOW.add_attribute(Bool, Attribute.new(:name<$!key>, :type(str), :package(Bool)));
-    Bool.HOW.add_attribute(Bool, Attribute.new(:name<$!value>, :type(int), :package(Bool)));
-    Bool.HOW.set_boolification_mode(Bool, 1);
-    Bool.HOW.publish_boolification_spec(Bool);
-    Bool.HOW.compose_repr(Bool);
-    Bool.HOW.add_method(Bool, 'key', nqp::getstaticcode(sub ($self) {
+    Bool2.HOW.set_base_type(Bool2, Int);
+    Bool2.HOW.add_attribute(Bool2, Attribute.new(:name<$!key>, :type(str), :package(Bool2)));
+    Bool2.HOW.add_attribute(Bool2, Attribute.new(:name<$!value>, :type(int), :package(Bool2)));
+    Bool2.HOW.set_boolification_mode(Bool2, 1);
+    Bool2.HOW.publish_boolification_spec(Bool2);
+    Bool2.HOW.compose_repr(Bool2);
+    Bool2.HOW.add_method(Bool2, 'key', nqp::getstaticcode(sub ($self) {
             nqp::getattr_s(nqp::decont($self),
-                Bool, '$!key');
+                Bool2, '$!key');
         }));
-    Bool.HOW.add_method(Bool, 'value', nqp::getstaticcode(sub ($self) {
+    Bool2.HOW.add_method(Bool2, 'value', nqp::getstaticcode(sub ($self) {
             nqp::getattr_i(nqp::decont($self),
-                Bool, '$!value');
+                Bool2, '$!value');
         }));
 
-    Perl6::Metamodel::EnumHOW.add_stash(Bool);
+    Perl6::Metamodel::EnumHOW.add_stash(Bool2);
 
-    # Bool::False and Bool::True.
-    my $false := nqp::box_i(0, Bool);
-    nqp::bindattr_s($false, Bool, '$!key', 'False');
-    nqp::bindattr_i($false, Bool, '$!value', 0);
+    # Bool2::False and Bool2::True.
+    my $false := nqp::box_i(0, Bool2);
+    nqp::bindattr_s($false, Bool2, '$!key', 'False');
+    nqp::bindattr_i($false, Bool2, '$!value', 0);
     #nqp::bindattr($false, Int, '$!value', 0);
-    Bool.HOW.add_enum_value(Bool, $false);
-    (Bool.WHO)<False> := $false;
-    my $true := nqp::box_i(1, Bool);
-    nqp::bindattr_s($true, Bool, '$!key', 'True');
-    nqp::bindattr_i($true, Bool, '$!value', 1);
+    Bool2.HOW.add_enum_value(Bool2, $false);
+    (Bool2.WHO)<False> := $false;
+    my $true := nqp::box_i(1, Bool2);
+    nqp::bindattr_s($true, Bool2, '$!key', 'True');
+    nqp::bindattr_i($true, Bool2, '$!value', 1);
     #nqp::bindattr($true, Int, '$!value', 1);
-    Bool.HOW.add_enum_value(Bool, $true);
-    (Bool.WHO)<True> := $true;
+    Bool2.HOW.add_enum_value(Bool2, $true);
+    (Bool2.WHO)<True> := $true;
 
-    EXPORT::DEFAULT.WHO<Bool>       := Bool;
+    EXPORT::DEFAULT.WHO<Bool2>       := Bool2;
 
 }
 
-# src/core/Bool.pm
+# src/core/Bool2.pm
 
-# enum Bool declared in BOOTSTRAP
+# enum Bool2 declared in BOOTSTRAP
 BEGIN {
-    Bool.^add_method('Bool',    my proto method Bool(|)    { * });
-    Bool.^add_method('gist',    my proto method gist(|)    { * });
-    Bool.^add_method('Numeric', my proto method Numeric(|) { * });
-    Bool.^add_method('Int',     my proto method Int(|)     { * });
-    Bool.^add_method('ACCEPTS', my proto method ACCEPTS(|) { * });
-    Bool.^add_method('pick',    my proto method pick(|) { * });
-    Bool.^add_method('roll',    my proto method roll(|) { * });
-    Bool.^add_method('perl',    my proto method perl(|) { * });
+    Bool2.^add_method('Bool2',    my proto method Bool2(|)    { * });
+    Bool2.^add_method('gist',    my proto method gist(|)    { * });
+    Bool2.^add_method('Numeric', my proto method Numeric(|) { * });
+    Bool2.^add_method('Int',     my proto method Int(|)     { * });
+    Bool2.^add_method('ACCEPTS', my proto method ACCEPTS(|) { * });
+    Bool2.^add_method('pick',    my proto method pick(|) { * });
+    Bool2.^add_method('roll',    my proto method roll(|) { * });
+    Bool2.^add_method('perl',    my proto method perl(|) { * });
 }
 BEGIN {
-    Bool.^add_multi_method('Bool',    my multi method Bool(Bool:D:)    { self });
-    Bool.^add_multi_method('gist',    my multi method gist(Bool:D:)    { self ?? 'True' !! 'False' });
-    Bool.^add_multi_method('Str',     my multi method Str(Bool:D:)     { self ?? 'True' !! 'False' });
-    Bool.^add_multi_method('Numeric', my multi method Numeric(Bool:D:) { self ?? 1 !! 0 });
-    Bool.^add_multi_method('Int',     my multi method Int(Bool:D:)     { self ?? 1 !! 0 });
-    Bool.^add_multi_method('Real',    my multi method Real(Bool:D:)    { self ?? 1 !! 0 });
-    Bool.^add_multi_method('ACCEPTS', my multi method ACCEPTS(Bool:D: Mu \topic ) { self });
-    Bool.^add_multi_method('perl', my multi method perl(Bool:D:) { self ?? 'Bool::True' !! 'Bool::False' });
+    Bool2.^add_multi_method('Bool2',    my multi method Bool2(Bool2:D:)    { self });
+    Bool2.^add_multi_method('gist',    my multi method gist(Bool2:D:)    { self ?? 'True' !! 'False' });
+    Bool2.^add_multi_method('Str',     my multi method Str(Bool2:D:)     { self ?? 'True' !! 'False' });
+    Bool2.^add_multi_method('Numeric', my multi method Numeric(Bool2:D:) { self ?? 1 !! 0 });
+    Bool2.^add_multi_method('Int',     my multi method Int(Bool2:D:)     { self ?? 1 !! 0 });
+    Bool2.^add_multi_method('Real',    my multi method Real(Bool2:D:)    { self ?? 1 !! 0 });
+    Bool2.^add_multi_method('ACCEPTS', my multi method ACCEPTS(Bool2:D: Mu \topic ) { self });
+    Bool2.^add_multi_method('perl', my multi method perl(Bool2:D:) { self ?? 'Bool2::True' !! 'Bool2::False' });
 
-    Bool.^add_multi_method('pick', my multi method pick(Bool:U:)    { nqp::p6bool(nqp::isge_n(nqp::rand_n(2e0), 1e0)) });
-    Bool.^add_multi_method('roll', my multi method roll(Bool:U:)    { nqp::p6bool(nqp::isge_n(nqp::rand_n(2e0), 1e0)) });
+    Bool2.^add_multi_method('pick', my multi method pick(Bool2:U:)    { nqp::p6bool(nqp::isge_n(nqp::rand_n(2e0), 1e0)) });
+    Bool2.^add_multi_method('roll', my multi method roll(Bool2:U:)    { nqp::p6bool(nqp::isge_n(nqp::rand_n(2e0), 1e0)) });
 }
 BEGIN {
-    Bool.^add_multi_method('Bool',    my multi method Bool(Bool:U:)    { Bool::False });
-    Bool.^add_multi_method('ACCEPTS', my multi method ACCEPTS(Bool:U: \topic ) { nqp::istype(topic, Bool) });
-    Bool.^add_multi_method('gist',    my multi method gist(Bool:U:)    { '(Bool)' });
-    Bool.^add_multi_method('perl', my multi method perl(Bool:U:) { 'Bool' });
+    Bool2.^add_multi_method('Bool2',    my multi method Bool2(Bool2:U:)    { Bool2::False });
+    Bool2.^add_multi_method('ACCEPTS', my multi method ACCEPTS(Bool2:U: \topic ) { nqp::istype(topic, Bool2) });
+    Bool2.^add_multi_method('gist',    my multi method gist(Bool2:U:)    { '(Bool2)' });
+    Bool2.^add_multi_method('perl', my multi method perl(Bool2:U:) { 'Bool2' });
 
-    Bool.^add_multi_method('pick', my multi method pick(Bool:U: $n) { self.^enum_value_list.pick($n) });
-    Bool.^add_multi_method('roll', my multi method roll(Bool:U: $n) { self.^enum_value_list.roll($n) });
+    Bool2.^add_multi_method('pick', my multi method pick(Bool2:U: $n) { self.^enum_value_list.pick($n) });
+    Bool2.^add_multi_method('roll', my multi method roll(Bool2:U: $n) { self.^enum_value_list.roll($n) });
 
-    Bool.^add_method('pred',  my method pred() { Bool::False });
-    Bool.^add_method('succ',  my method succ() { Bool::True });
+    Bool2.^add_method('pred',  my method pred() { Bool2::False });
+    Bool2.^add_method('succ',  my method succ() { Bool2::True });
 
-    Bool.^add_method('enums', my method enums() { self.^enum_values.Map });
+    Bool2.^add_method('enums', my method enums() { self.^enum_values.Map });
 
-    Bool.^compose;
+    Bool2.^compose;
 }
 
