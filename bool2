@@ -15,15 +15,15 @@ my \Bool2 := Metamodel::EnumHOW.new_type(:name<Bool2>);
     Bool2.HOW.set_boolification_mode(Bool2, 1);
     Bool2.HOW.publish_boolification_spec(Bool2);
     Bool2.HOW.compose_repr(Bool2);
-=finish
-    Bool2.HOW.add_method(Bool2, 'key', nqp::getstaticcode(sub ($self) {
+    Bool2.HOW.add_method(Bool2, 'key', nqp::getstaticcode(nqp::getattr(sub ($self) {
             nqp::getattr_s(nqp::decont($self),
                 Bool2, '$!key');
-        }));
-    Bool2.HOW.add_method(Bool2, 'value', nqp::getstaticcode(sub ($self) {
+        }, Code, '$!do')));
+    Bool2.HOW.add_method(Bool2, 'value', nqp::getstaticcode(nqp::getattr(sub ($self) {
             nqp::getattr_i(nqp::decont($self),
                 Bool2, '$!value');
-        }));
+        }, Code, '$!do')));
+=finish
 
     Perl6::Metamodel::EnumHOW.add_stash(Bool2);
 
