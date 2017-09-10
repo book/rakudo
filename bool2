@@ -4,12 +4,12 @@ use nqp;
 
 my constant \Bool2 := Metamodel::EnumHOW.new_type(:name<Bool2>, :base_type(Int));
 
+{
 # src/Perl6/Metamodel/BOOTSTRAP.nqp
 
     # class Bool2 is Int {
     #     has str $!key;
     #     has int $!value;
-    Bool2.HOW.set_base_type(Bool2, Int);
     Bool2.HOW.add_attribute(Bool2, Attribute.new(:name<$!key>, :type(str), :package(Bool2)));
     Bool2.HOW.add_attribute(Bool2, Attribute.new(:name<$!value>, :type(int), :package(Bool2)));
     Bool2.HOW.set_boolification_mode(Bool2, 1);
@@ -25,7 +25,6 @@ my constant \Bool2 := Metamodel::EnumHOW.new_type(:name<Bool2>, :base_type(Int))
         }, Code, '$!do')));
 
     Metamodel::EnumHOW.add_stash(Bool2);
-=finish
 
     # Bool2::False and Bool2::True.
     my $false := nqp::box_i(0, Bool2);
@@ -40,6 +39,7 @@ my constant \Bool2 := Metamodel::EnumHOW.new_type(:name<Bool2>, :base_type(Int))
     #nqp::bindattr($true, Int, '$!value', 1);
     Bool2.HOW.add_enum_value(Bool2, $true);
     (Bool2.WHO)<True> := $true;
+}
 
     EXPORT::DEFAULT.WHO<Bool2>       := Bool2;
 
@@ -48,6 +48,7 @@ my constant \Bool2 := Metamodel::EnumHOW.new_type(:name<Bool2>, :base_type(Int))
 
 # enum Bool2 declared in BOOTSTRAP
 
+{
     Bool2.^add_method('Bool2',    my proto method Bool2(|)    { * });
     Bool2.^add_method('gist',    my proto method gist(|)    { * });
     Bool2.^add_method('Numeric', my proto method Numeric(|) { * });
@@ -56,7 +57,9 @@ my constant \Bool2 := Metamodel::EnumHOW.new_type(:name<Bool2>, :base_type(Int))
     Bool2.^add_method('pick',    my proto method pick(|) { * });
     Bool2.^add_method('roll',    my proto method roll(|) { * });
     Bool2.^add_method('perl',    my proto method perl(|) { * });
+}
 
+{
     Bool2.^add_multi_method('Bool',    my multi method Bool(Bool2:D:)    { self });
     Bool2.^add_multi_method('gist',    my multi method gist(Bool2:D:)    { self ?? 'True' !! 'False' });
     Bool2.^add_multi_method('Str',     my multi method Str(Bool2:D:)     { self ?? 'True' !! 'False' });
@@ -65,7 +68,9 @@ my constant \Bool2 := Metamodel::EnumHOW.new_type(:name<Bool2>, :base_type(Int))
     Bool2.^add_multi_method('Real',    my multi method Real(Bool2:D:)    { self ?? 1 !! 0 });
     Bool2.^add_multi_method('ACCEPTS', my multi method ACCEPTS(Bool2:D: Mu \topic ) { self });
     Bool2.^add_multi_method('perl', my multi method perl(Bool2:D:) { self ?? 'Bool2::True' !! 'Bool2::False' });
+}
 
+{
     Bool2.^add_multi_method('pick', my multi method pick(Bool2:U:)    { nqp::p6bool(nqp::isge_n(nqp::rand_n(2e0), 1e0)) });
     Bool2.^add_multi_method('roll', my multi method roll(Bool2:U:)    { nqp::p6bool(nqp::isge_n(nqp::rand_n(2e0), 1e0)) });
 
@@ -73,14 +78,19 @@ my constant \Bool2 := Metamodel::EnumHOW.new_type(:name<Bool2>, :base_type(Int))
     Bool2.^add_multi_method('ACCEPTS', my multi method ACCEPTS(Bool2:U: \topic ) { nqp::istype(topic, Bool2) });
     Bool2.^add_multi_method('gist',    my multi method gist(Bool2:U:)    { '(Bool2)' });
     Bool2.^add_multi_method('perl', my multi method perl(Bool2:U:) { 'Bool2' });
+}
 
+{
     Bool2.^add_multi_method('pick', my multi method pick(Bool2:U: $n) { self.^enum_value_list.pick($n) });
     Bool2.^add_multi_method('roll', my multi method roll(Bool2:U: $n) { self.^enum_value_list.roll($n) });
+}
 
+{
     Bool2.^add_method('pred',  my method pred() { Bool2::False });
     Bool2.^add_method('succ',  my method succ() { Bool2::True });
 
     Bool2.^add_method('enums', my method enums() { self.^enum_values.Map });
 
     Bool2.^compose;
+}
 
