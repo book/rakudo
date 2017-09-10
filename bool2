@@ -41,7 +41,7 @@ my constant \Bool2 := Metamodel::EnumHOW.new_type(:name<Bool2>, :base_type(Int))
     (Bool2.WHO)<True> := $true;
 }
 
-    EXPORT::DEFAULT.WHO<Bool2>       := Bool2;
+#    EXPORT::DEFAULT.WHO<Bool2>       := Bool2;
 
 
 # src/core/Bool2.pm
