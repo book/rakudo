@@ -57,7 +57,7 @@ my constant \Bool2 := Metamodel::EnumHOW.new_type(:name<Bool2>, :base_type(Int))
     Bool2.^add_method('roll',    my proto method roll(|) { * });
     Bool2.^add_method('perl',    my proto method perl(|) { * });
 
-    Bool2.^add_multi_method('Bool2',    my multi method Bool2(Bool2:D:)    { self });
+    Bool2.^add_multi_method('Bool',    my multi method Bool(Bool2:D:)    { self });
     Bool2.^add_multi_method('gist',    my multi method gist(Bool2:D:)    { self ?? 'True' !! 'False' });
     Bool2.^add_multi_method('Str',     my multi method Str(Bool2:D:)     { self ?? 'True' !! 'False' });
     Bool2.^add_multi_method('Numeric', my multi method Numeric(Bool2:D:) { self ?? 1 !! 0 });
@@ -69,7 +69,7 @@ my constant \Bool2 := Metamodel::EnumHOW.new_type(:name<Bool2>, :base_type(Int))
     Bool2.^add_multi_method('pick', my multi method pick(Bool2:U:)    { nqp::p6bool(nqp::isge_n(nqp::rand_n(2e0), 1e0)) });
     Bool2.^add_multi_method('roll', my multi method roll(Bool2:U:)    { nqp::p6bool(nqp::isge_n(nqp::rand_n(2e0), 1e0)) });
 
-    Bool2.^add_multi_method('Bool2',    my multi method Bool2(Bool2:U:)    { Bool2::False });
+    Bool2.^add_multi_method('Bool',    my multi method Bool(Bool2:U:)    { Bool2::False });
     Bool2.^add_multi_method('ACCEPTS', my multi method ACCEPTS(Bool2:U: \topic ) { nqp::istype(topic, Bool2) });
     Bool2.^add_multi_method('gist',    my multi method gist(Bool2:U:)    { '(Bool2)' });
     Bool2.^add_multi_method('perl', my multi method perl(Bool2:U:) { 'Bool2' });
