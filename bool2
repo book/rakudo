@@ -2,7 +2,7 @@
 
 use nqp;
 
-my \Bool2 := Metamodel::EnumHOW.new_type(:name<Bool2>);
+my constant \Bool2 := Metamodel::EnumHOW.new_type(:name<Bool2>, :base_type(Int));
 
 # src/Perl6/Metamodel/BOOTSTRAP.nqp
 
