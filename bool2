@@ -23,9 +23,9 @@ my \Bool2 := Metamodel::EnumHOW.new_type(:name<Bool2>);
             nqp::getattr_i(nqp::decont($self),
                 Bool2, '$!value');
         }, Code, '$!do')));
-=finish
 
-    Perl6::Metamodel::EnumHOW.add_stash(Bool2);
+    Metamodel::EnumHOW.add_stash(Bool2);
+=finish
 
     # Bool2::False and Bool2::True.
     my $false := nqp::box_i(0, Bool2);
