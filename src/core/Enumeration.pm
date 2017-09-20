@@ -1,16 +1,12 @@
 # Method that we have on enumeration types.
-my role Enumeration {
-    has $.key;
-    has $.value;
-    has int $!index;
-
+my role EnumerationMethods {
     method enums() { self.^enum_values.Map }
 
-    multi method kv(::?CLASS:D:) { ($!key, $!value) }
-    method pair(::?CLASS:D:) { $!key => $!value }
+    multi method kv(::?CLASS:D:) { ($.key, $.value) }
+    method pair(::?CLASS:D:) { $.key => $.value }
 
-    multi method gist(::?CLASS:D:) { $!key                     }
-    multi method perl(::?CLASS:D:) { self.^name ~ '::' ~ $!key }
+    multi method gist(::?CLASS:D:) { $.key                     }
+    multi method perl(::?CLASS:D:) { self.^name ~ '::' ~ $.key }
 
     multi method pick(::?CLASS:U:)       { self.^enum_value_list.pick     }
     multi method pick(::?CLASS:U: \n)    { self.^enum_value_list.pick(n)  }
@@ -19,13 +15,13 @@ my role Enumeration {
     multi method roll(::?CLASS:U: \n)    { self.^enum_value_list.roll(n)  }
     multi method roll(::?CLASS:D: *@pos) { self xx +?( @pos[0] // 1 )     }
 
-    multi method Numeric(::?CLASS:D:) { $!value.Numeric }
-    multi method Int(::?CLASS:D:)     { $!value.Int }
-    multi method Real(::?CLASS:D:)    { $!value.Real }
+    multi method Numeric(::?CLASS:D:) { $.value.Numeric }
+    multi method Int(::?CLASS:D:)     { $.value.Int }
+    multi method Real(::?CLASS:D:)    { $.value.Real }
 
-    multi method WHICH(::?CLASS:D:) { 
+    multi method WHICH(::?CLASS:D:) {
         nqp::box_s(
-          nqp::concat(self.^name,nqp::concat("|",$!index)),
+          nqp::concat(self.^name,nqp::concat("|",$.index)),
           ObjAt
         )
     }
@@ -68,6 +64,13 @@ my role Enumeration {
         )
     }
 }
+
+my role Enumeration does EnumerationMethods {
+    has $.key;
+    has $.value;
+    has int $.index;
+}
+
 
 # Methods that we also have if the base type of an enumeration is
 # Numeric.
